@@ -1,0 +1,15 @@
+---
+- name: ubuntu apache install in playbook
+  hosts: ubuntu
+  become: true
+  tasks:
+  - name: stop  apache2 in ubuntu
+    service:
+      name: apache2
+      state: stopped
+    tags: stop
+  - name: uninstall apche2 in ubuntu
+    apt:
+      name: apache2
+      state: absent
+    tags: uninstall

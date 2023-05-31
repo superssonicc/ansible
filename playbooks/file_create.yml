@@ -1,0 +1,10 @@
+---
+- name: creating file in playbook
+  hosts: all
+  gather_facts: no
+  become: true
+  tasks:
+  - name: using file module
+    file:
+      path: /home/anadi/demo.txt
+      state: touch

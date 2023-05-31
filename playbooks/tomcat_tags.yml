@@ -1,0 +1,26 @@
+---
+- name: Install apache on all servers
+  hosts: all
+  become: true
+  tasks:
+  - name: Install httpd
+    dnf:
+      name: httpd
+      state: installed
+    when: ansible_facts['os_family'] == "Redhat"
+    tags: install apache
+  - name: Start httpd
+    service:
+      name: httpd
+      state:  started
+    when: ansible_facts['os_family'] == "Redhat"
+    ignore_errors: yes
+  - name: Install apache2
+    apt:
+      name: apache2
+      state: installed
+  - name: start apache2
+    service:
+      name: apache2
+      state: started
+

@@ -1,0 +1,9 @@
+---
+- name: creating dir in playbook
+  hosts: all
+  become: true
+  tasks:
+  - name: using dir module
+    file:
+      path: /home/anadi/new_folder
+      state: absent

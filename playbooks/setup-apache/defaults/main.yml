@@ -1,0 +1,3 @@
+---
+# defaults file for setup-apache
+ports: 8080

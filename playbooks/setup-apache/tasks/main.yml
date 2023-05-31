@@ -1,0 +1,40 @@
+---
+# tasks file for setup-apache
+    - name: Install httpd
+      dnf:
+        name: httpd
+        state: present
+      when: ansible_facts['os_family'] == "RedHat"
+      notify: Start httpd
+
+    - name: Intall apache2
+      apt:
+        name: apache2
+        state: present
+      when: ansible_facts['os_family'] == "Debian"
+      notify: Start apache2
+        
+    - name: copying index file to path
+      copy:
+        src: /home/anadi/ansible/index.html
+        dest: /var/www/html
+        mode: 0666
+
+    - name: updated httpd port config
+      lineinfile:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: '^Listen '
+        insertafter: '^#Listen '
+        line: 'Listen {{ port }}'
+      when: ansible_facts['os_family'] == "RedHat" 
+      notify: restart httpd
+
+    - name: update apache port config
+      lineinfile:
+        path: /etc/apache2/ports.conf
+        regexp: '^Listen '
+        insertafter: '^# /etc/apache2/sites-enabled/000-default.conf '
+        line: 'Listen {{ port }}'
+      when: ansible_facts['os_family'] == "Debian"
+      notify: restart apache2
+

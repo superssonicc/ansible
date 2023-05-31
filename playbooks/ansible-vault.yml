@@ -1,0 +1,11 @@
+---
+- name: clone repo
+  hosts: all
+  become: true
+  vars_files:
+    - github.yml
+  tasks:
+  - name: cloning testing repo
+    git:
+      repo: https://superssonicc:{{ password }}@github.com/superssonicc/testing.git
+      dest: /home/anadi/kuldeep/test-vault

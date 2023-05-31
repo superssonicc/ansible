@@ -1,0 +1,11 @@
+---
+- name: create user via playbook
+  hosts: all
+  become: true
+  vars_files:
+    - sonic.yml
+  tasks:
+  - name: create user
+    user:
+      name: "{{ user }}"
+

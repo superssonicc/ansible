@@ -1,0 +1,9 @@
+---
+- name: installing package 
+  hosts: all
+  become: true
+  tasks:
+  - name: install git via dnf
+    dnf:
+      name: git
+      state: installed

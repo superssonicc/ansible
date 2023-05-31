@@ -1,0 +1,22 @@
+---
+- name: install apache via playbook
+  hosts: all
+  become: true
+  tasks:
+  - name: install httpd 
+    dnf:
+      name: httpd
+      state: installed
+  - name: start httpd
+    service:
+      name: httpd
+      state: started
+  - name: install apache
+    apt:
+      name: apache2
+      state: installed
+  - name: start apache2
+    service:
+      name: apache2
+      state: started
+

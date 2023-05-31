@@ -1,0 +1,13 @@
+---
+- name: uninstalling apache in this playbook
+  hosts: all
+  become: true
+  tasks:
+  - name: stop apache
+    service:
+      name: httpd
+      state: stopped
+  - name: uninstall httpd
+    dnf:
+      name: httpd
+      state:  removed

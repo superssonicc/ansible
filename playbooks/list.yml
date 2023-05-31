@@ -1,0 +1,17 @@
+---
+- name: install multiple packages
+  hosts: redhat amazon
+  become: true
+  tasks:
+    - name: using dnf for multi package
+      dnf:
+        name: '{{ item }}'
+        state: installed
+      with_items:
+        - git
+        - make
+        - gcc
+        - wget
+        - telnet
+        - gzip
+

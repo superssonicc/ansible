@@ -1,0 +1,16 @@
+---
+- name: ubuntu apache install in playbook
+  hosts: ubuntu
+  become: true
+  tasks:
+  - name: install apche2 in ubuntu
+    apt:
+      name: apache2
+      state: present
+    notify: start apache2
+
+  handlers:
+  - name: start apache2
+    service:
+      name: apache2
+      state: started

@@ -1,0 +1,7 @@
+---
+- name: printing hello in playbook
+  hosts: all
+  tasks:
+  - name: doing debug
+    debug:
+      var: ansible_facts

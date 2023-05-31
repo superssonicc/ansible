@@ -1,0 +1,11 @@
+---
+- name: using copy module in playbook
+  hosts: all
+  become: true
+  tasks:
+  - name: using copy module
+    copy:
+      src: /home/anadi/ansible/hosts
+      dest: /opt/
+      mode:  400
+      owner: john

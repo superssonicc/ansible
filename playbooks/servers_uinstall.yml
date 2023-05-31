@@ -1,0 +1,29 @@
+---
+- name: uninstall apache on all servers
+  hosts: all
+  become: true
+  tasks:
+    - name: Stop httpd on Red Hat based systems
+      service:
+        name: httpd
+        state: stopped
+      when: ansible_distribution == "RedHat"
+
+    - name: Uninstall httpd on Red Hat based systems
+      package:
+        name: httpd
+        state: absent
+      when: ansible_distribution == "RedHat"
+
+    - name: Stop apache2 on Debian based systems
+      service:
+        name: apache2
+        state: stopped
+      when: ansible_distribution == "Debian"
+
+    - name: Uninstall apache2 on Debian based systems
+      package:
+        name: apache2
+        state: absent
+      when: ansible_distribution == "Debian"
+
